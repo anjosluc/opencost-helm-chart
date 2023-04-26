@@ -1,0 +1,32 @@
+# Default values for opencost-helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: opencost
+replicaCount: 1
+cloudProviderAPIKey: "AIzaSyD29bGxmHAVEOBYtgd8sYM2gM2ekfxQX4U" # The GCP Pricing API requires a key. This is supplied just for evaluation.
+
+
+clusterId: "my-cluster"
+prometheusServerEndpoint: "http://my-prometheus-server.prometheus.svc"
+
+image:
+  repository: quay.io/kubecost1/kubecost-cost-model
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 9003
+
+ingress:
+  enabled: true
+  host: opencost.example.com
+
+requests:
+  cpu: "10m"
+  memory: "55M"
+limits:
+  cpu: "999m"
+  memory: "1G"
